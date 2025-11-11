@@ -340,7 +340,7 @@ def main():
     # Period selection
     period = st.sidebar.selectbox(
         "Data Period:",
-        options=["1mo", "3mo", "6mo", "1y"],
+        options=["1y", "2y", "3y", "4y"],
         index=2
     )
     
@@ -364,7 +364,7 @@ def main():
                 analyzer = ElliottWaveAnalyzer(window=window)
                 
                 # Download data
-                df = yf.download(selected_stock, interval='1h', period=period)
+                df = yf.download(selected_stock, interval='1D', period=period)
                 
                 if df.empty:
                     st.error(f"Failed to download data for {selected_stock}")
