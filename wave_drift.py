@@ -13,36 +13,19 @@ warnings.filterwarnings('ignore')
 
 # Popular US stocks database
 STOCK_DATABASE = {
-    "AAPL": "Apple Inc.",
-    "MSFT": "Microsoft Corporation", 
-    "GOOGL": "Alphabet Inc. (Google)",
-    "AMZN": "Amazon.com Inc.",
-    "TSLA": "Tesla Inc.",
-    "NVDA": "NVIDIA Corporation",
-    "META": "Meta Platforms Inc. (Facebook)",
-    "JPM": "JPMorgan Chase & Co.",
-    "JNJ": "Johnson & Johnson",
-    "V": "Visa Inc.",
-    "PG": "Procter & Gamble",
-    "UNH": "UnitedHealth Group",
-    "HD": "Home Depot Inc.",
-    "DIS": "Walt Disney Company",
-    "PYPL": "PayPal Holdings",
-    "NFLX": "Netflix Inc.",
-    "ADBE": "Adobe Inc.",
-    "CRM": "Salesforce Inc.",
-    "INTC": "Intel Corporation",
-    "CSCO": "Cisco Systems Inc.",
-    "PEP": "PepsiCo Inc.",
-    "T": "AT&T Inc.",
-    "WMT": "Walmart Inc.",
-    "XOM": "Exxon Mobil Corporation",
-    "CVX": "Chevron Corporation",
-    "BA": "Boeing Company",
-    "MCD": "McDonald's Corporation",
-    "SBUX": "Starbucks Corporation",
-    "AMD": "Advanced Micro Devices Inc.",
-    "UBER": "Uber Technologies Inc."
+    "EURUSD=X": "Euro to US Dollar",
+    "USDJPY=X": "US Dollar to Japanese Yen", 
+    "GBPUSD=X": "Great British Pound to US Dollar",
+    "AUDUSD=X": "Australian Dollar to US Dollar",
+    "USDCAD=X": "US Dollar to Canadain Dollar",
+    "USDCHF=X": "US Dollar to Swiss Frank",
+    "NZDUSD=X": "New Zealand Dollar to US Dollar",
+    "EURJPY=X": "Euro to Japanese Yen",
+    "GBPJPY=X": "Great British Pound to Japanese Yen",
+    "EURGBP=X": "Euro to Great British Pound",
+    "CADJPY=X": "Canadian Dollar to Japanese Yen",
+    "AUDJPY=X": "Australian Dollar to Japanese Yen"
+
 }
 
 class ElliottWaveAnalyzer:
