@@ -476,7 +476,7 @@ def main():
         4. Click **'Analyze Elliott Waves'** to run the analysis
         
         ### Supported Currency Pairs:
-        All major currency pairs including "EURUSD=X", "USDJPY=X", "GBPUSD=X", "AUDUSD=X", "USDCAD=X", "USDCHF=X", "NZDUSD=X", "EURJPY=X", and many more!
+        All major currency pairs including "EURUSD", "USDJPY", "GBPUSD", "AUDUSD", "USDCAD", "USDCHF", "NZDUSD", "EURJPY", and many more!
         
         ⚠️ **Disclaimer**: This is for educational purposes only. Always do your own research and consult with financial advisors before making investment decisions. Futures and Forex trading, and investing in stocks contains substantial risk and is not suitable for every investor. An investor could potentially lose all or more than the initial investment. Don't invest money that you cannot afford to lose. Risk capital is money that can be lost without jeopardizing ones financial security or life style. Only risk capital should be used for trading and only those with sufficient risk capital should consider trading. Past performance is not necessarily indicative of future results.
         """)
@@ -484,7 +484,7 @@ def main():
         # Quick stock preview
         st.subheader("Popular Currency Pairs Available")
         cols = st.columns(4)
-        popular_stocks = ["EURUSD=X", "USDJPY=X", "GBPUSD=X", "AUDUSD=X", "USDCAD=X", "USDCHF=X", "NZDUSD=X", "EURJPY=X"]
+        popular_stocks = ["EURUSD", "USDJPY", "GBPUSD", "AUDUSD", "USDCAD", "USDCHF", "NZDUSD", "EURJPY"]
         
         for i, stock in enumerate(popular_stocks):
             with cols[i % 4]:
