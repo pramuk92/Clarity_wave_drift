@@ -24,7 +24,7 @@ CURRENCY_DATABASE = {
     "GBPJPY=X": "Great British Pound to Japanese Yen",
     "EURGBP=X": "Euro to Great British Pound",
     "CADJPY=X": "Canadian Dollar to Japanese Yen",
-    "AUDJPY=X": "Australian Dollar to Japanese Yen",
+    "AUDJPY=X": "Australian Dollar to Japanese Yen"
 }
 
 class ElliottWaveAnalyzer:
