@@ -12,7 +12,7 @@ import io
 warnings.filterwarnings('ignore')
 
 # Popular US stocks database
-CURRENCY_DATABASE = {
+STOCK_DATABASE = {
     "EURUSD=X": "Euro to US Dollar",
     "USDJPY=X": "US Dollar to Japanese Yen", 
     "GBPUSD=X": "Great British Pound to US Dollar",
@@ -252,7 +252,7 @@ def create_detailed_forecast_chart(df, waves, current_price, projections, stock)
 def generate_analysis_report(df, waves, current_price, projections, stock):
     report = f"# ELLIOTT WAVE ANALYSIS REPORT\n"
     report += "=" * 50 + "\n\n"
-    report += f"**Stock:** {stock} - {CURRENCY_DATABASE.get(stock, 'N/A')}\n\n"
+    report += f"**Stock:** {stock} - {STOCK_DATABASE.get(stock, 'N/A')}\n\n"
     report += f"**Analysis Date:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n"
     report += f"**Current Price:** ${current_price:.2f}\n\n"
     report += f"**Data Period:** {len(df)} trading days\n\n"
@@ -331,9 +331,9 @@ def main():
     # Stock selection
     selected_stock = st.sidebar.selectbox(
         "Select Stock:",
-        options=list(CURRENCY_DATABASE.keys()),
+        options=list(STOCK_DATABASE.keys()),
         index=5,  # Default to NVDA
-        format_func=lambda x: f"{x} - {CURRENCY_DATABASE[x]}"
+        format_func=lambda x: f"{x} - {STOCK_DATABASE[x]}"
     )
     
     # Period selection
@@ -382,7 +382,7 @@ def main():
                 # Display stock info
                 col1, col2, col3 = st.columns(3)
                 with col1:
-                    st.metric("Stock", f"{selected_stock} - {CURRENCY_DATABASE[selected_stock]}")
+                    st.metric("Stock", f"{selected_stock} - {STOCK_DATABASE[selected_stock]}")
                 with col2:
                     st.metric("Current Price", f"${current_price:.2f}")
                 with col3:
@@ -488,8 +488,7 @@ def main():
         for i, stock in enumerate(popular_stocks):
             with cols[i % 4]:
                 st.write(f"**{stock}**")
-                st.caption(CURRENCY_DATABASE[stock])
+                st.caption(STOCK_DATABASE[stock])
 
 if __name__ == "__main__":
     main()
-
