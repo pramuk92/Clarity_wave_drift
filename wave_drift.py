@@ -331,7 +331,7 @@ def main():
     
     # Currency Pair selection
     selected_stock = st.sidebar.selectbox(
-        "Select Stock:",
+        "Select Currency Pair:",
         options=list(STOCK_DATABASE.keys()),
         index=5,  # Default to NVDA
         format_func=lambda x: f"{x} - {STOCK_DATABASE[x]}"
