@@ -484,7 +484,7 @@ def main():
         # Quick stock preview
         st.subheader("Popular Currency Pairs Available")
         cols = st.columns(4)
-        popular_stocks = ["EURUSD", "USDJPY", "GBPUSD", "AUDUSD", "USDCAD", "USDCHF", "NZDUSD", "EURJPY"]
+        popular_stocks = ["EURUSD=X", "USDJPY=X", "GBPUSD=X", "AUDUSD=X", "USDCAD=X", "USDCHF=X", "NZDUSD=X", "EURJPY=X"]
         
         for i, stock in enumerate(popular_stocks):
             with cols[i % 4]:
