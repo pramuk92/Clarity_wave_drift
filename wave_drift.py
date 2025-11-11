@@ -11,7 +11,7 @@ import io
 
 warnings.filterwarnings('ignore')
 
-# Popular Currency Pairs database
+# Popular US stocks database
 CURRENCY_DATABASE = {
     "EURUSD=X": "Euro to US Dollar",
     "USDJPY=X": "US Dollar to Japanese Yen", 
@@ -102,7 +102,7 @@ class ElliottWaveAnalyzer:
         waves = self.identify_impulse_wave(prices, all_extrema_prices.values, all_extrema_idx)
         return waves, all_extrema_idx, all_extrema_prices
 
-def create_original_analysis_chart(df, waves, extrema_idx, extrema_prices, currency):
+def create_original_analysis_chart(df, waves, extrema_idx, extrema_prices, stock):
     fig, ax = plt.subplots(figsize=(14, 6))
     
     # Plot price data
@@ -120,7 +120,7 @@ def create_original_analysis_chart(df, waves, extrema_idx, extrema_prices, curre
                    [start_price, end_price], 
                    color=colors[j], linewidth=2, label=wave_labels[j] if i == 0 else "")
     
-    ax.set_title(f'{currency} - Elliott Wave Analysis', fontsize=14, fontweight='bold')
+    ax.set_title(f'{stock} - Elliott Wave Analysis', fontsize=14, fontweight='bold')
     ax.set_xlabel('Date')
     ax.set_ylabel('Price ($)')
     ax.legend()
@@ -130,13 +130,13 @@ def create_original_analysis_chart(df, waves, extrema_idx, extrema_prices, curre
     return fig
 
 def create_forecast_levels_chart(df, waves, extrema_idx, extrema_prices, 
-                               current_price, projections, currency):
+                               current_price, projections, stock):
     fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(14, 8))
     
     # Top panel: Historical analysis
     ax1.plot(df.index, df['Close'], label='Close Price', linewidth=1, color='black')
     ax1.scatter(df.index[extrema_idx], extrema_prices, color='red', s=30, zorder=5)
-    ax1.set_title(f'{currency} - Elliott Wave Analysis', fontweight='bold')
+    ax1.set_title(f'{stock} - Elliott Wave Analysis', fontweight='bold')
     ax1.set_ylabel('Price ($)')
     ax1.legend()
     ax1.grid(True, alpha=0.3)
@@ -162,7 +162,7 @@ def create_forecast_levels_chart(df, waves, extrema_idx, extrema_prices,
     plt.tight_layout()
     return fig
 
-def create_detailed_forecast_chart(df, waves, current_price, projections, currency):
+def create_detailed_forecast_chart(df, waves, current_price, projections, stock):
     """Create the detailed forecast chart with projection line"""
     latest_wave = waves[-1]
     wave_points = latest_wave['points']
@@ -171,7 +171,7 @@ def create_detailed_forecast_chart(df, waves, current_price, projections, curren
     fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(14, 8))
     
     # Top panel: Historical pattern
-    ax1.plot(df.index, df['Close'], label=f'{currency} Close Price', linewidth=2, color='black')
+    ax1.plot(df.index, df['Close'], label=f'{stock} Close Price', linewidth=2, color='black')
     
     # Highlight the identified wave pattern
     colors = ['red', 'blue', 'green', 'orange', 'purple']
@@ -185,7 +185,7 @@ def create_detailed_forecast_chart(df, waves, current_price, projections, curren
     
     # Mark wave points
     ax1.scatter(df.index[wave_indices], wave_points, color='darkblue', s=80, zorder=5, alpha=0.8)
-    ax1.set_title(f'{currency} - Identified Elliott Wave Pattern', fontsize=14, fontweight='bold')
+    ax1.set_title(f'{stock} - Identified Elliott Wave Pattern', fontsize=14, fontweight='bold')
     ax1.set_ylabel('Price ($)', fontweight='bold')
     ax1.legend()
     ax1.grid(True, alpha=0.3)
@@ -240,7 +240,7 @@ def create_detailed_forecast_chart(df, waves, current_price, projections, curren
     ax2.plot(future_dates, forecast_prices, color='green', linewidth=2, 
             linestyle='-', alpha=0.6, label='Expected Path (Projected)')
     
-    ax2.set_title(f'{currency} - Elliott Wave Forecast & Target Levels', fontsize=14, fontweight='bold')
+    ax2.set_title(f'{stock} - Elliott Wave Forecast & Target Levels', fontsize=14, fontweight='bold')
     ax2.set_xlabel('Date', fontweight='bold')
     ax2.set_ylabel('Price ($)', fontweight='bold')
     ax2.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
@@ -249,10 +249,10 @@ def create_detailed_forecast_chart(df, waves, current_price, projections, curren
     plt.tight_layout()
     return fig
 
-def generate_analysis_report(df, waves, current_price, projections, currency):
+def generate_analysis_report(df, waves, current_price, projections, stock):
     report = f"# ELLIOTT WAVE ANALYSIS REPORT\n"
     report += "=" * 50 + "\n\n"
-    report += f"**Currency:** {currency} - {CURRENCY_DATABASE.get(currency, 'N/A')}\n\n"
+    report += f"**Stock:** {stock} - {CURRENCY_DATABASE.get(stock, 'N/A')}\n\n"
     report += f"**Analysis Date:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n"
     report += f"**Current Price:** ${current_price:.2f}\n\n"
     report += f"**Data Period:** {len(df)} trading days\n\n"
@@ -286,7 +286,7 @@ def generate_analysis_report(df, waves, current_price, projections, currency):
         report += "## NO CLEAR PATTERNS DETECTED\n\n"
         report += "No clear Elliott Wave patterns detected in the current data.\n\n"
         report += "**Possible reasons:**\n"
-        report += "- The currency is in a corrective phase\n"
+        report += "- The stock is in a corrective phase\n"
         report += "- The pattern is too complex for automated detection\n"
         report += "- Try adjusting the analysis parameters\n"
     
@@ -328,9 +328,9 @@ def main():
     # Sidebar
     st.sidebar.title("Configuration")
     
-    # currency selection
-    selected_currency = st.sidebar.selectbox(
-        "Select Currency:",
+    # Stock selection
+    selected_stock = st.sidebar.selectbox(
+        "Select Stock:",
         options=list(CURRENCY_DATABASE.keys()),
         index=5,  # Default to NVDA
         format_func=lambda x: f"{x} - {CURRENCY_DATABASE[x]}"
@@ -339,7 +339,7 @@ def main():
     # Period selection
     period = st.sidebar.selectbox(
         "Data Period:",
-        options=["1mo", "3mo", "6mo", "1y"],
+        options=["1y", "2y", "5y", "10y"],
         index=2
     )
     
@@ -357,16 +357,16 @@ def main():
     
     # Main content
     if analyze_btn:
-        with st.spinner(f"Downloading {selected_currency} data and analyzing..."):
+        with st.spinner(f"Downloading {selected_stock} data and analyzing..."):
             try:
                 # Initialize analyzer
                 analyzer = ElliottWaveAnalyzer(window=window)
                 
                 # Download data
-                df = yf.download(selected_currency, interval='1H', period=period)
+                df = yf.download(selected_stock, interval='1D', period=period)
                 
                 if df.empty:
-                    st.error(f"Failed to download data for {selected_currency}")
+                    st.error(f"Failed to download data for {selected_stock}")
                     return
                 
                 # Perform analysis
@@ -379,10 +379,10 @@ def main():
                     latest_wave = waves[-1]
                     projections = analyzer.fibonacci_projection(latest_wave['points'], current_price)
                 
-                # Display currency info
+                # Display stock info
                 col1, col2, col3 = st.columns(3)
                 with col1:
-                    st.metric("Currency", f"{selected_currency} - {CURRENCY_DATABASE[selected_currency]}")
+                    st.metric("Stock", f"{selected_stock} - {CURRENCY_DATABASE[selected_stock]}")
                 with col2:
                     st.metric("Current Price", f"${current_price:.2f}")
                 with col3:
@@ -394,27 +394,27 @@ def main():
                 with tab1:
                     # Chart 1: Original Analysis
                     st.subheader("1. Elliott Wave Pattern Recognition")
-                    fig1 = create_original_analysis_chart(df, waves, extrema_idx, extrema_prices, selected_currency)
+                    fig1 = create_original_analysis_chart(df, waves, extrema_idx, extrema_prices, selected_stock)
                     st.pyplot(fig1)
                     plt.close(fig1)
                     
                     # Chart 2: Forecast Levels
                     st.subheader("2. Forecast with Fibonacci Levels")
                     fig2 = create_forecast_levels_chart(df, waves, extrema_idx, extrema_prices, 
-                                                      current_price, projections, selected_currency)
+                                                      current_price, projections, selected_stock)
                     st.pyplot(fig2)
                     plt.close(fig2)
                     
                     # Chart 3: Detailed Forecast (if waves found)
                     if waves and projections:
                         st.subheader("3. Detailed Forecast with Projected Path")
-                        fig3 = create_detailed_forecast_chart(df, waves, current_price, projections, selected_currency)
+                        fig3 = create_detailed_forecast_chart(df, waves, current_price, projections, selected_stock)
                         st.pyplot(fig3)
                         plt.close(fig3)
                 
                 with tab2:
                     # Analysis Report
-                    report = generate_analysis_report(df, waves, current_price, projections, selected_currency)
+                    report = generate_analysis_report(df, waves, current_price, projections, selected_stock)
                     st.markdown(report)
                 
                 with tab3:
@@ -454,14 +454,14 @@ def main():
                 
             except Exception as e:
                 st.error(f"Analysis failed: {str(e)}")
-                st.info("Try adjusting the analysis window or selecting a different currency.")
+                st.info("Try adjusting the analysis window or selecting a different stock.")
     
     else:
         # Welcome message
         st.markdown("""
         ## Welcome to Elliott Wave Analyzer Pro! 🎯
         
-        This tool automatically identifies Elliott Wave patterns in currency prices and provides:
+        This tool automatically identifies Elliott Wave patterns in stock prices and provides:
         
         - **📊 Pattern Recognition**: Automatic detection of impulse waves
         - **🎯 Fibonacci Projections**: Price targets based on wave measurements  
@@ -469,26 +469,27 @@ def main():
         - **📋 Detailed Reports**: Comprehensive analysis with probability assessments
         
         ### How to use:
-        1. Select a currency from the dropdown in the sidebar
+        1. Select a stock from the dropdown in the sidebar
         2. Choose your preferred data period
         3. Adjust the analysis window if needed
         4. Click **'Analyze Elliott Waves'** to run the analysis
         
-        ### Supported Currency Pairs:
-        All major currency pairs including EURUSD, USDJPY, GBPUSD, AUDUSD, USDCAD, NZDUSD, and many more!
+        ### Supported Stocks:
+        All major US stocks including AAPL, MSFT, GOOGL, AMZN, TSLA, NVDA, and many more!
         
         ⚠️ **Disclaimer**: This is for educational purposes only. Always do your own research and consult with financial advisors before making investment decisions. Futures and Forex trading, and investing in stocks contains substantial risk and is not suitable for every investor. An investor could potentially lose all or more than the initial investment. Don't invest money that you cannot afford to lose. Risk capital is money that can be lost without jeopardizing ones financial security or life style. Only risk capital should be used for trading and only those with sufficient risk capital should consider trading. Past performance is not necessarily indicative of future results.
         """)
         
-        # Quick currency preview
-        st.subheader("Popular Currency Pairs Available")
+        # Quick stock preview
+        st.subheader("Popular Stocks Available")
         cols = st.columns(4)
-        popular_currencies = ["EURUSD", "USDJPY", "GBPUSD", "AUDUSD", "USDCAD", "USDCHF", "NZDUSD", "EURJPY"]
+        popular_stocks = ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA", "NVDA", "META", "JPM"]
         
-        for i, currency in enumerate(popular_currencies):
+        for i, stock in enumerate(popular_stocks):
             with cols[i % 4]:
-                st.write(f"**{currency}**")
-                st.caption(CURRENCY_DATABASE[currency])
+                st.write(f"**{stock}**")
+                st.caption(CURRENCY_DATABASE[stock])
 
 if __name__ == "__main__":
     main()
+
