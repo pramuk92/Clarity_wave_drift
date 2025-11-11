@@ -11,7 +11,7 @@ import io
 
 warnings.filterwarnings('ignore')
 
-# Popular US stocks database
+# Popular Currency Pairs database
 STOCK_DATABASE = {
     "EURUSD=X": "Euro to US Dollar",
     "USDJPY=X": "US Dollar to Japanese Yen", 
@@ -329,7 +329,7 @@ def main():
     # Sidebar
     st.sidebar.title("Configuration")
     
-    # Stock selection
+    # Currency Pair selection
     selected_stock = st.sidebar.selectbox(
         "Select Stock:",
         options=list(STOCK_DATABASE.keys()),
@@ -462,7 +462,7 @@ def main():
         st.markdown("""
         ## Welcome to Elliott Wave Analyzer Pro! 🎯
         
-        This tool automatically identifies Elliott Wave patterns in stock prices and provides:
+        This tool automatically identifies Elliott Wave patterns in Currency exchange rates and provides:
         
         - **📊 Pattern Recognition**: Automatic detection of impulse waves
         - **🎯 Fibonacci Projections**: Price targets based on wave measurements  
@@ -470,19 +470,19 @@ def main():
         - **📋 Detailed Reports**: Comprehensive analysis with probability assessments
         
         ### How to use:
-        1. Select a stock from the dropdown in the sidebar
+        1. Select a currency pair from the dropdown in the sidebar
         2. Choose your preferred data period
         3. Adjust the analysis window if needed
         4. Click **'Analyze Elliott Waves'** to run the analysis
         
         ### Supported Currency Pairs:
-        All major US stocks including "EURUSD=X", "USDJPY=X", "GBPUSD=X", "AUDUSD=X", "USDCAD=X", "USDCHF=X", "NZDUSD=X", "EURJPY=X", and many more!
+        All major currency pairs including "EURUSD=X", "USDJPY=X", "GBPUSD=X", "AUDUSD=X", "USDCAD=X", "USDCHF=X", "NZDUSD=X", "EURJPY=X", and many more!
         
         ⚠️ **Disclaimer**: This is for educational purposes only. Always do your own research and consult with financial advisors before making investment decisions. Futures and Forex trading, and investing in stocks contains substantial risk and is not suitable for every investor. An investor could potentially lose all or more than the initial investment. Don't invest money that you cannot afford to lose. Risk capital is money that can be lost without jeopardizing ones financial security or life style. Only risk capital should be used for trading and only those with sufficient risk capital should consider trading. Past performance is not necessarily indicative of future results.
         """)
         
         # Quick stock preview
-        st.subheader("Popular Stocks Available")
+        st.subheader("Popular Currency Pairs Available")
         cols = st.columns(4)
         popular_stocks = ["EURUSD=X", "USDJPY=X", "GBPUSD=X", "AUDUSD=X", "USDCAD=X", "USDCHF=X", "NZDUSD=X", "EURJPY=X"]
         
