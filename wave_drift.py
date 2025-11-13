@@ -24,7 +24,11 @@ STOCK_DATABASE = {
     "GBPJPY=X": "Great British Pound to Japanese Yen",
     "EURGBP=X": "Euro to Great British Pound",
     "CADJPY=X": "Canadian Dollar to Japanese Yen",
-    "AUDJPY=X": "Australian Dollar to Japanese Yen"
+    "AUDJPY=X": "Australian Dollar to Japanese Yen",
+    "GBPCHF=X": "Great British Pound to Swiss Frank",
+    "AUDCHF=X": "Australian Dollar to Swiss Frank",
+    "NZDCHF=X": "New Zealand Dollar to Swiss Frank",
+    "CADCHF=X": "Canadian Dollar to Swiss Frank"
 
 }
 
