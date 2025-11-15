@@ -1,10 +1,21 @@
-# Core Streamlit app dependencies
-streamlit>=1.30.0,<1.52
-numpy>=1.26.4,<2.4
-pandas>=2.2.2,<2.4
-scikit-learn>=1.4.2,<1.8
-matplotlib>=3.8.0,<3.11
-plotly>=5.24.1,<6.5
-seaborn>=0.13.2,<0.14
-yfinance>=0.2.66,<0.3
-scipy>=1.12.0,<1.17
+# Framework - Pinned to known stable version
+streamlit==1.28.1
+
+# Core numerical computing - Exact versions
+numpy==1.26.4
+pandas==2.2.2
+scipy==1.12.0
+
+# Machine Learning - Stable versions
+scikit-learn==1.4.2
+
+# Visualization - Exact versions
+matplotlib==3.8.0
+plotly==5.24.1
+seaborn==0.13.2
+
+# Financial data
+yfinance==0.2.66
+
+# Utilities
+setuptools==68.2.2
