@@ -344,7 +344,7 @@ def main():
     # Period selection
     period = st.sidebar.selectbox(
         "Data Period:",
-        options=["1y"],
+        options=["1mo", "3mo", "6mo", "1y"],
         index=2
     )
     
